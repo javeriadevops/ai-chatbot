@@ -13,14 +13,15 @@ url = "https://api.groq.com/openai/v1/chat/completions"
 headers = {"Authorization": f"Bearer {api_key}"}
 
 payload = {
-    "model": "llama-3.3-70b-versatile",
+    "model": "openai/gpt-oss-20b",
     "messages": [
         {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Say hello in one short sentence."},
+        {"role": "user", "content": "i want to learn docker."},
     ],
 }
 
 response = httpx.post(url, headers=headers, json=payload, timeout=30)
 
 print("STATUS:", response.status_code)
-print(response.json())
+data = response.json()
+print("REPLY:", data["choices"][0]["message"]["content"])
